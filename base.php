@@ -145,7 +145,7 @@ function to($url)
 }
 
 $Admin=new DB ('admin');
-$Member=new DB ('member');
+$Menber=new DB ('menber');
 $Goods=new DB ('goods');
 $Type=new DB ('type');
 $Ord=new DB ('ord');

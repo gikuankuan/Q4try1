@@ -1,4 +1,4 @@
-<?php include_once "base.php"?>
+<?php include_once "base.php" ?>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,12 +25,33 @@
                                 <a href="?">回首頁</a> |
                                 <a href="?do=news">最新消息</a> |
                                 <a href="?do=look">購物流程</a> |
-                                <a href="?do=buycart">購物車</a> |
-                                <a href="?do=login">會員登入</a> |
-                                <a href="?do=admin">管理登入</a>
+                                <?php
+                                if (empty($_SESSION['member'])) {
+                                ?>
+                                        <a href="?do=buycart">購物車</a> |
+                                        <a href="?do=login">會員登入</a> |
+                                <?php
+                                } else {
+                                ?>
+                                        <a href="javascript:location.href='api/logout.php?logout=member'">登出</a> |
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+                                if (empty($_SESSION['admin'])) {
+                                ?>
+                                        <a href="?do=admin">管理登入</a>
+                                <?php
+                                } else {
+                                ?>
+                                        <a href="admin.php">返回管理</a>
+                                <?php
+                                }
+                                ?>
                         </div>
-                        <marquee >情人節特惠活動 &nbsp; 年終特賣會開跑了</marquee>
-                        
+                        <marquee>情人節特惠活動 &nbsp; 年終特賣會開跑了</marquee>
+
                 </div>
                 <div id="left" class="ct">
                         <div style="min-height:400px;">
@@ -43,13 +64,13 @@
                 </div>
                 <div id="right">
                         <?php
-                                $do=(!empty($_GET['do']))?$_GET['do']:"main";
-                                $file='frontend/'.$do.".php";
-                                if(file_exists($file)){
-                                        include $file;
-                                }else{
-                                        include "frontend/main.php";
-                                }
+                        $do = (!empty($_GET['do'])) ? $_GET['do'] : "main";
+                        $file = 'frontend/' . $do . ".php";
+                        if (file_exists($file)) {
+                                include $file;
+                        } else {
+                                include "frontend/main.php";
+                        }
                         ?>
 
 
@@ -57,7 +78,7 @@
 
                 </div>
                 <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
-                <?= $Bottom->find(1)['bottom'];?> </div>
+                        <?= $Bottom->find(1)['bottom']; ?> </div>
         </div>
 
 </body>
